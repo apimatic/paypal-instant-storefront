@@ -1,4 +1,4 @@
-# PayPal Orders API Sample Application
+# PayPal Instant Storefront
 
 A lightweight Node.js/Express storefront that lets you create products and generate shareable checkout links with integrated PayPal Smart Payment Buttons — built entirely on the PayPal Sandbox.
 
