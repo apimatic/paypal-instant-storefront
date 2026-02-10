@@ -7,8 +7,22 @@ This application uses the PayPal TypeScript SDK generated via [APIMatic's Code G
 ## Demo
 ![paypalsampleapp](https://github.com/user-attachments/assets/dc3e5b02-934e-44b5-9df9-20387557babe)
 
- 
+## Generating this App with Context Plugins
 
+This application was generated using Claude Code with the APIMatic Context Plugin.
+
+### Prompt Used
+
+```
+Build me a "PayPal Instant Storefront" app using the PayPal MCP server you have access to. The app has a setup page where I enter my PayPal client-id and secret once, then a product creation form where I enter a product name, description, price, currency, and upload or provide product images. When I click "Generate Checkout Page" it creates a live, shareable checkout URL like /checkout/abc123 that anyone can open — they see the product details with images, price, description, and a working PayPal Smart Payment Button. The payment flow should be fully server-side using the PayPal Server SDK: backend creates the order when buyer clicks pay, captures it after approval, and shows a confirmation page with order details. I should be able to create multiple products and each gets its own unique checkout link I can share with anyone. Include a simple dashboard where I can see all my products and their checkout links, plus a list of completed payments showing order ID, buyer info, amount, and status for each product. The checkout pages should be mobile-responsive and look like real professional product pages. Support sandbox and live mode via environment variables. Only use the Orders API and Payments API, do not use Transaction Search or Vault. Use the PayPal MCP server for all API details — server SDK methods, order creation and capture flow, request/response schemas — don't guess anything. Make it deployable with npm install and npm start.
+```
+
+### Time Investment
+
+| Phase | Time |
+|-------|------|
+| Initial generation | `10 minutes` |
+| Testing and refinement | `20 minutes` |
 
 ## Features
 
@@ -53,21 +67,4 @@ The app is a single Express/TypeScript server that renders all pages as server-s
 When a buyer visits a checkout link, the page loads the PayPal JS SDK and renders Smart Payment Buttons. Clicking "Pay" triggers a server-side `POST /api/orders` call that uses the `paypal-apimatic-sdk` to create an order with full item details and amount breakdowns. After the buyer approves, a `POST /api/orders/:orderId/capture` call captures the payment, extracts payer info and capture IDs from the response, and stores the payment record.
 
 All state (credentials, products, payments) lives in memory, so it resets on server restart. Product images are saved to the `uploads/` directory via Multer. The entire app runs in Sandbox mode — no real money is ever charged.
-
-## AI Generation Details
-
-This application was generated using Claude Code with the APIMatic Context Plugin.
-
-### Prompt Used
-
-```
-Build me a "PayPal Instant Storefront" app using the PayPal MCP server you have access to. The app has a setup page where I enter my PayPal client-id and secret once, then a product creation form where I enter a product name, description, price, currency, and upload or provide product images. When I click "Generate Checkout Page" it creates a live, shareable checkout URL like /checkout/abc123 that anyone can open — they see the product details with images, price, description, and a working PayPal Smart Payment Button. The payment flow should be fully server-side using the PayPal Server SDK: backend creates the order when buyer clicks pay, captures it after approval, and shows a confirmation page with order details. I should be able to create multiple products and each gets its own unique checkout link I can share with anyone. Include a simple dashboard where I can see all my products and their checkout links, plus a list of completed payments showing order ID, buyer info, amount, and status for each product. The checkout pages should be mobile-responsive and look like real professional product pages. Support sandbox and live mode via environment variables. Only use the Orders API and Payments API, do not use Transaction Search or Vault. Use the PayPal MCP server for all API details — server SDK methods, order creation and capture flow, request/response schemas — don't guess anything. Make it deployable with npm install and npm start.
-```
-
-### Time Investment
-
-| Phase | Time |
-|-------|------|
-| Initial generation | `10 minutes` |
-| Testing and refinement | `20 minutes` |
 
